@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact Messages | Admin | TrailNest</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="styles.css">
+<script src="theme.js"></script>
+<style>
+  label { display: block; font-size: 13px; color: var(--fg-mute); margin-bottom: 6px; font-family: var(--font-mono); }
+  input, textarea { width: 100%; background: var(--ink-800); border: 1px solid var(--line-strong); color: var(--fg); padding: 11px 13px; border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 14.5px; margin-bottom: 18px; }
+  textarea { resize: vertical; min-height: 90px; }
+  .admin-card { background: var(--ink-900); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 18px; }
+  .lock-screen { max-width: 380px; margin: 120px auto; text-align: center; }
+  .note { background: var(--amber-dim); border: 1px solid rgba(242,163,75,0.3); color: var(--amber); font-size: 13px; padding: 12px 16px; border-radius: var(--radius-sm); margin-bottom: 24px; font-family: var(--font-mono); }
+  .msg-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; flex-wrap: wrap; }
+  .msg-name { font-size: 16px; font-weight: 600; }
+  .msg-meta { color: var(--fg-mute); font-size: 12.5px; font-family: var(--font-mono); margin-top: 4px; }
+  .msg-body { color: var(--fg-dim); font-size: 14.5px; margin-top: 14px; line-height: 1.6; }
+  .badge { font-size: 11px; padding: 3px 9px; border-radius: 100px; font-family: var(--font-mono); }
+  .badge-open { background: var(--amber-dim); color: var(--amber); }
+  .badge-replied { background: var(--cyan-dim); color: var(--cyan); }
+  .btn-danger { background: transparent; border: 1px solid rgba(255,122,82,0.4); color: var(--coral); padding: 7px 14px; font-size: 13px; border-radius: var(--radius-sm); cursor: pointer; }
+  .btn-danger:hover { background: var(--coral-dim); }
+  .reply-box { display: none; margin-top: 16px; border-top: 1px solid var(--line); padding-top: 16px; }
+  .reply-box.open { display: block; }
+  @media (max-width: 600px) { .lock-screen { margin: 60px auto; } .admin-card { padding: 20px; } }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="wrap nav-row">
+    <a href="index.html" class="logo"><span class="logo-mark"><i class="fa-solid fa-plane"></i></span>TrailNest</a>
+    <nav class="nav-links">
+      <a href="admin.html">Admin home</a>
+      <a href="admin-bookings.html">Booking requests</a>
+      <a href="index.html"><i class="fa-solid fa-house" style="margin-right:5px;"></i>Home</a>
+    </nav>
+    <div class="nav-cta">
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme"></button>
+      <span class="pill"><i class="fa-solid fa-lock"></i> Admin</span>
+      <button class="nav-burger" onclick="toggleMobileNav()" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="nav-mobile-panel" id="mobile-nav">
+      <a href="admin.html">Admin home</a>
+      <a href="admin-bookings.html">Booking requests</a>
+      <a href="index.html">Home</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap" style="padding-top:56px; padding-bottom:96px; max-width:820px;">
+
+  <div id="lock" class="lock-screen">
+    <span class="eyebrow">Restricted</span>
+    <h1 style="font-size:26px; margin-top:14px;">Admin sign-in</h1>
+    <p style="color:var(--fg-dim); font-size:14.5px; margin-top:10px;">Demo gate only — swap for real authentication before launch.</p>
+    <div style="margin-top:28px; text-align:left;">
+      <label for="pw">Password</label>
+      <input id="pw" type="password" placeholder="Enter admin password">
+      <button class="btn btn-primary btn-block" onclick="tryUnlock()">Sign in</button>
+      <p id="pw-error" style="display:none; color:var(--coral); font-size:13px; margin-top:10px;">Incorrect password.</p>
+    </div>
+  </div>
+
+  <div id="dashboard" style="display:none;">
+    <span class="eyebrow">Admin</span>
+    <h1 style="font-size:clamp(24px,3vw,32px); margin-top:14px;">Contact messages</h1>
+    <p style="color:var(--fg-dim); font-size:15px; margin-top:8px; max-width:560px;">Messages sent through the Contact page. Click "Reply" to write a response — it opens your own email app with the message ready to send.</p>
+
+    <div class="note">Replies open your default email app (mailto link) so a real email actually goes out. Fully automatic server-side sending would need a backend email service (e.g. Resend, SendGrid) wired in later.</div>
+
+    <div id="message-list"></div>
+    <p id="no-messages" style="color:var(--fg-mute); font-size:14px; display:none;">No messages yet.</p>
+
+    <div class="grid-2" style="margin-top:32px;">
+      <a href="admin.html" class="admin-card" style="display:block; text-decoration:none;">
+        <span class="eyebrow">Manage</span>
+        <h3 style="font-size:18px; margin-top:10px;">Blog admin →</h3>
+        <p style="color:var(--fg-dim); font-size:14px; margin-top:8px;">Publish, edit, or delete blog posts.</p>
+      </a>
+      <a href="admin-bookings.html" class="admin-card" style="display:block; text-decoration:none;">
+        <span class="eyebrow">Manage</span>
+        <h3 style="font-size:18px; margin-top:10px;">Booking requests →</h3>
+        <p style="color:var(--fg-dim); font-size:14px; margin-top:8px;">View package requests from the pricing page and update their status.</p>
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a href="index.html" class="logo"><span class="logo-mark"><i class="fa-solid fa-plane"></i></span>TrailNest</a>
+        <p style="margin-top:14px;">Curated tour packages — real itineraries, transparent pricing, and support you can reach.</p>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <ul>
+          <li><a href="index.html#destinations">Destinations</a></li>
+          <li><a href="index.html#packages">Packages</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Admin</h4>
+        <ul>
+          <li><a href="admin.html">Blog admin</a></li>
+          <li><a href="admin-contact.html">Contact messages</a></li>
+          <li><a href="admin-bookings.html">Booking requests</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 TrailNest. All rights reserved.</span>
+      <span>Admin demo — add real authentication before going live.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="site-data.js"></script>
+<script>
+const DEMO_PASSWORD = 'admin123';
+
+function toggleMobileNav() {
+  document.getElementById('mobile-nav').classList.toggle('open');
+}
+
+function tryUnlock() {
+  const val = document.getElementById('pw').value;
+  if (val === DEMO_PASSWORD) {
+    document.getElementById('lock').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    renderMessages();
+  } else {
+    document.getElementById('pw-error').style.display = 'block';
+  }
+}
+document.getElementById('pw').addEventListener('keydown', function (e) {
+  if (e.key === 'Enter') tryUnlock();
+});
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str || '';
+  return div.innerHTML;
+}
+
+function renderMessages() {
+  const msgs = SVData.getMessages();
+  const list = document.getElementById('message-list');
+  const empty = document.getElementById('no-messages');
+  list.innerHTML = '';
+
+  if (msgs.length === 0) {
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+
+  msgs.slice().reverse().forEach(function (msg) {
+    const card = document.createElement('div');
+    card.className = 'admin-card';
+    card.innerHTML =
+      '<div class="msg-top">' +
+        '<div>' +
+          '<div class="msg-name">' + escapeHtml(msg.name) + ' <span class="badge ' + (msg.replied ? 'badge-replied' : 'badge-open') + '">' + (msg.replied ? 'Replied' : 'Awaiting reply') + '</span></div>' +
+          '<div class="msg-meta">' + escapeHtml(msg.email) + (msg.phone ? ' · ' + escapeHtml(msg.phone) : '') + ' · ' + escapeHtml(msg.topic) + ' · ' + escapeHtml(msg.date) + '</div>' +
+        '</div>' +
+        '<button class="btn-danger" onclick="removeMessage(\'' + msg.id + '\')">Delete</button>' +
+      '</div>' +
+      '<div class="msg-body">' + escapeHtml(msg.message) + '</div>' +
+      '<div style="margin-top:14px; display:flex; gap:10px;">' +
+        '<button class="btn btn-ghost" onclick="toggleReply(\'' + msg.id + '\')"><i class="fa-solid fa-reply"></i> Reply</button>' +
+      '</div>' +
+      '<div class="reply-box" id="reply-' + msg.id + '">' +
+        '<label>Subject</label>' +
+        '<input id="subject-' + msg.id + '" type="text" value="Re: your message to TrailNest">' +
+        '<label>Your reply</label>' +
+        '<textarea id="body-' + msg.id + '" placeholder="Write your reply here...">Hi ' + escapeHtml(msg.name) + ',\n\nThanks for reaching out about \u201c' + escapeHtml(msg.topic) + '\u201d.\n\n\n\nBest,\nTrailNest Support</textarea>' +
+        '<div style="display:flex; gap:10px; flex-wrap:wrap;">' +
+          '<button class="btn btn-primary" onclick="sendReply(\'' + msg.id + '\', \'' + escapeHtml(msg.email) + '\')"><i class="fa-solid fa-paper-plane"></i> Open in email app</button>' +
+          '<button class="btn btn-ghost" onclick="copyReply(\'' + msg.id + '\', \'' + escapeHtml(msg.email) + '\')"><i class="fa-regular fa-copy"></i> Copy reply</button>' +
+        '</div>' +
+        '<p id="sent-note-' + msg.id + '" style="display:none; color:var(--cyan); font-size:12.5px; margin-top:10px;"></p>' +
+      '</div>';
+    list.appendChild(card);
+  });
+}
+
+function toggleReply(id) {
+  const box = document.getElementById('reply-' + id);
+  box.classList.toggle('open');
+}
+
+function sendReply(id, email) {
+  const subject = document.getElementById('subject-' + id).value;
+  const body = document.getElementById('body-' + id).value;
+  const mailto = 'mailto:' + encodeURIComponent(email) +
+    '?subject=' + encodeURIComponent(subject) +
+    '&body=' + encodeURIComponent(body);
+  window.location.href = mailto;
+  SVData.markMessageReplied(id);
+  markBadgeReplied(id);
+  const note = document.getElementById('sent-note-' + id);
+  if (note) {
+    note.style.display = 'block';
+    note.textContent = 'Opening your email app now. Nothing happened? Use "Copy reply" below and paste it into Gmail/Outlook instead.';
+  }
+}
+
+function copyReply(id, email) {
+  const subject = document.getElementById('subject-' + id).value;
+  const body = document.getElementById('body-' + id).value;
+  const text = 'To: ' + email + '\nSubject: ' + subject + '\n\n' + body;
+  navigator.clipboard.writeText(text).then(function () {
+    SVData.markMessageReplied(id);
+    markBadgeReplied(id);
+    const note = document.getElementById('sent-note-' + id);
+    if (note) {
+      note.style.display = 'block';
+      note.textContent = 'Copied! Paste it into Gmail, Outlook, or any mail app and hit send.';
+    }
+  }).catch(function () {
+    alert('Could not copy automatically — please select and copy the reply text manually.');
+  });
+}
+
+function markBadgeReplied(id) {
+  const cards = document.querySelectorAll('.admin-card');
+  cards.forEach(function (card) {
+    const box = card.querySelector('#reply-' + id);
+    if (!box) return;
+    const badge = card.querySelector('.badge');
+    if (badge) {
+      badge.textContent = 'Replied';
+      badge.className = 'badge badge-replied';
+    }
+  });
+}
+
+function removeMessage(id) {
+  SVData.deleteMessage(id);
+  renderMessages();
+}
+</script>
+
+</body>
+</html>

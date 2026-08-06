@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin | TrailNest</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="styles.css">
+<script src="theme.js"></script>
+<style>
+  .admin-shell { display: grid; grid-template-columns: 1fr 1.1fr; gap: 32px; }
+  @media (max-width: 900px) { .admin-shell { grid-template-columns: 1fr; } }
+  label { display: block; font-size: 13px; color: var(--fg-mute); margin-bottom: 6px; font-family: var(--font-mono); }
+  input, textarea, select {
+    width: 100%; background: var(--ink-800); border: 1px solid var(--line-strong);
+    color: var(--fg); padding: 11px 13px; border-radius: var(--radius-sm);
+    font-family: var(--font-body); font-size: 14.5px; margin-bottom: 18px;
+  }
+  textarea { resize: vertical; min-height: 90px; }
+  .admin-card { background: var(--ink-900); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 28px; }
+  .post-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .post-row:last-child { border-bottom: none; }
+  .post-row-left { display: flex; align-items: center; gap: 12px; min-width: 0; flex: 1; }
+  .post-row-left > div:last-child { min-width: 0; overflow: hidden; flex: 1; }
+  .post-row-thumb { width: 56px; height: 40px; border-radius: 6px; object-fit: cover; flex-shrink: 0; background: var(--ink-700); }
+  .post-row-title { font-size: 14.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .post-row-meta { color: var(--fg-mute); font-size: 12.5px; font-family: var(--font-mono); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .btn-danger { background: transparent; border: 1px solid rgba(255,122,82,0.4); color: var(--coral); padding: 7px 14px; font-size: 13px; border-radius: var(--radius-sm); cursor: pointer; flex-shrink: 0; }
+  .btn-danger:hover { background: var(--coral-dim); }
+  .lock-screen { max-width: 380px; margin: 120px auto; text-align: center; }
+  .note { background: var(--amber-dim); border: 1px solid rgba(242,163,75,0.3); color: var(--amber); font-size: 13px; padding: 12px 16px; border-radius: var(--radius-sm); margin-bottom: 24px; font-family: var(--font-mono); }
+  .img-preview { width: 100%; aspect-ratio: 16/9; border-radius: var(--radius-sm); border: 1px solid var(--line-strong); object-fit: cover; margin-bottom: 18px; background: var(--ink-800); display: none; }
+
+  @media (max-width: 600px) {
+    .lock-screen { margin: 60px auto; }
+    .post-row { flex-wrap: wrap; }
+    .post-row-left { min-width: 100%; }
+    .btn-danger { margin-left: auto; }
+    .rte-btn { font-size: 12px; padding: 6px 9px; }
+    .admin-shell, .grid-2 { gap: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="wrap nav-row">
+    <a href="index.html" class="logo"><span class="logo-mark"><i class="fa-solid fa-plane"></i></span>TrailNest</a>
+    <nav class="nav-links">
+      <a href="admin-contact.html">Contact messages</a>
+      <a href="admin-bookings.html">Booking requests</a>
+      <a href="index.html"><i class="fa-solid fa-house" style="margin-right:5px;"></i>Home</a>
+    </nav>
+    <div class="nav-cta">
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme"></button>
+      <span class="pill"><i class="fa-solid fa-lock"></i> Admin</span>
+      <button class="nav-burger" onclick="toggleMobileNav()" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="nav-mobile-panel" id="mobile-nav">
+      <a href="admin-contact.html">Contact messages</a>
+      <a href="admin-bookings.html">Booking requests</a>
+      <a href="index.html">Home</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap" style="padding-top:56px; padding-bottom:96px;">
+
+  <div id="lock" class="lock-screen">
+    <span class="eyebrow">Restricted</span>
+    <h1 style="font-size:26px; margin-top:14px;">Admin sign-in</h1>
+    <p style="color:var(--fg-dim); font-size:14.5px; margin-top:10px;">Demo gate only — swap for real authentication before launch.</p>
+    <div style="margin-top:28px; text-align:left;">
+      <label for="pw">Password</label>
+      <input id="pw" type="password" placeholder="Enter admin password">
+      <button class="btn btn-primary btn-block" onclick="tryUnlock()">Sign in</button>
+      <p id="pw-error" style="display:none; color:var(--coral); font-size:13px; margin-top:10px;">Incorrect password.</p>
+    </div>
+  </div>
+
+  <div id="dashboard" style="display:none;">
+    <span class="eyebrow">Content admin</span>
+    <h1 style="font-size:clamp(26px,3.2vw,36px); margin-top:14px;">Publish a blog post</h1>
+    <p style="color:var(--fg-dim); font-size:15px; margin-top:10px; max-width:560px;">New posts appear on the public blog page immediately, with a "Read more" link to their own page.</p>
+
+    <div class="note">No posts are pre-added — the blog starts empty until you publish here. Posts are stored in this browser only (localStorage demo); wire this up to a real backend/CMS before production use.</div>
+
+    <div class="admin-shell" style="margin-top:32px;">
+      <div class="admin-card">
+        <h3 style="font-size:16px; margin-bottom:20px;">New post</h3>
+
+        <label for="f-image">Image URL</label>
+        <input id="f-image" type="text" placeholder="https://... (paste an image link)" oninput="previewImage()">
+        <img id="img-preview" class="img-preview" alt="Preview">
+
+        <label for="f-title">Title</label>
+        <input id="f-title" type="text" placeholder="e.g. 5 things to pack for a highland trek">
+
+        <label for="f-category">Category</label>
+        <select id="f-category">
+          <option>Destination guide</option>
+          <option>Trip planning</option>
+          <option>Update</option>
+          <option>Behind the scenes</option>
+        </select>
+
+        <label for="f-excerpt">Excerpt</label>
+        <textarea id="f-excerpt" placeholder="One or two sentences that summarise the post."></textarea>
+
+        <label for="f-body">Full post (optional)</label>
+        <div class="rte-toolbar">
+          <button type="button" class="rte-btn" onclick="rteCmd('bold')"><b>B</b></button>
+          <button type="button" class="rte-btn" onclick="rteCmd('italic')"><i>I</i></button>
+          <button type="button" class="rte-btn" onclick="rteCmd('insertUnorderedList')">• List</button>
+          <button type="button" class="rte-btn" onclick="rteInsertImage()"><i class="fa-regular fa-image"></i> Image</button>
+          <button type="button" class="rte-btn" onclick="rteInsertTable()"><i class="fa-solid fa-table"></i> Table</button>
+        </div>
+        <div id="f-body" class="rte-editor" contenteditable="true" data-placeholder="Write the full post here — use the toolbar to add images, lists, or a table."></div>
+
+        <button class="btn btn-primary btn-block" onclick="publishPost()">Publish post</button>
+        <p id="publish-msg" style="display:none; color:var(--cyan); font-size:13px; margin-top:12px;">Published — check the blog page.</p>
+      </div>
+
+      <div class="admin-card">
+        <h3 style="font-size:16px; margin-bottom:6px;">Published posts</h3>
+        <p style="color:var(--fg-mute); font-size:13px; margin-bottom:14px;">Delete any post below.</p>
+        <div id="post-list"></div>
+        <p id="no-posts" style="color:var(--fg-mute); font-size:13.5px; display:none;">Nothing published yet.</p>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:24px;">
+      <a href="admin-contact.html" class="admin-card" style="display:block; text-decoration:none;">
+        <span class="eyebrow">Manage</span>
+        <h3 style="font-size:18px; margin-top:10px;">Contact messages →</h3>
+        <p style="color:var(--fg-dim); font-size:14px; margin-top:8px;">View and reply to messages sent through the Contact page.</p>
+      </a>
+      <a href="admin-bookings.html" class="admin-card" style="display:block; text-decoration:none;">
+        <span class="eyebrow">Manage</span>
+        <h3 style="font-size:18px; margin-top:10px;">Booking requests →</h3>
+        <p style="color:var(--fg-dim); font-size:14px; margin-top:8px;">View package requests from the pricing page and update their status.</p>
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a href="index.html" class="logo"><span class="logo-mark"><i class="fa-solid fa-plane"></i></span>TrailNest</a>
+        <p style="margin-top:14px;">Curated tour packages — real itineraries, transparent pricing, and support you can reach.</p>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <ul>
+          <li><a href="index.html#destinations">Destinations</a></li>
+          <li><a href="index.html#packages">Packages</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Admin</h4>
+        <ul>
+          <li><a href="admin.html">Blog admin</a></li>
+          <li><a href="admin-contact.html">Contact messages</a></li>
+          <li><a href="admin-bookings.html">Booking requests</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 TrailNest. All rights reserved.</span>
+      <span>Admin demo — add real authentication before going live.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="blog-data.js"></script>
+<script>
+const DEMO_PASSWORD = 'admin123';
+
+function toggleMobileNav() {
+  document.getElementById('mobile-nav').classList.toggle('open');
+}
+
+function tryUnlock() {
+  const val = document.getElementById('pw').value;
+  if (val === DEMO_PASSWORD) {
+    document.getElementById('lock').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    renderPosts();
+  } else {
+    document.getElementById('pw-error').style.display = 'block';
+  }
+}
+document.getElementById('pw').addEventListener('keydown', function (e) {
+  if (e.key === 'Enter') tryUnlock();
+});
+
+function previewImage() {
+  const url = document.getElementById('f-image').value.trim();
+  const img = document.getElementById('img-preview');
+  if (!url) { img.style.display = 'none'; return; }
+  img.src = url;
+  img.style.display = 'block';
+}
+
+function rteCmd(command) {
+  document.getElementById('f-body').focus();
+  document.execCommand(command, false, null);
+}
+
+function rteInsertImage() {
+  const url = prompt('Paste an image URL to insert into the post:');
+  if (!url) return;
+  document.getElementById('f-body').focus();
+  document.execCommand('insertHTML', false, '<img src="' + url.replace(/"/g, '&quot;') + '" alt="">');
+}
+
+function rteInsertTable() {
+  const rows = parseInt(prompt('How many rows?', '2'), 10) || 2;
+  const cols = parseInt(prompt('How many columns?', '2'), 10) || 2;
+  let html = '<table>';
+  for (let r = 0; r < rows; r++) {
+    html += '<tr>';
+    for (let c = 0; c < cols; c++) html += '<td>Cell</td>';
+    html += '</tr>';
+  }
+  html += '</table><p><br></p>';
+  document.getElementById('f-body').focus();
+  document.execCommand('insertHTML', false, html);
+}
+
+function publishPost() {
+  const image = document.getElementById('f-image').value.trim();
+  const title = document.getElementById('f-title').value.trim();
+  const category = document.getElementById('f-category').value;
+  const excerpt = document.getElementById('f-excerpt').value.trim();
+  const body = document.getElementById('f-body').innerHTML.trim();
+
+  if (!title || !excerpt) {
+    alert('Please add at least a title and excerpt.');
+    return;
+  }
+
+  SVBlog.addPost({
+    image: image,
+    title: title,
+    category: category,
+    excerpt: excerpt,
+    body: body,
+    date: new Date().toISOString().slice(0, 10)
+  });
+
+  document.getElementById('f-image').value = '';
+  document.getElementById('f-title').value = '';
+  document.getElementById('f-excerpt').value = '';
+  document.getElementById('f-body').innerHTML = '';
+  document.getElementById('img-preview').style.display = 'none';
+
+  const msg = document.getElementById('publish-msg');
+  msg.style.display = 'block';
+  setTimeout(function () { msg.style.display = 'none'; }, 2500);
+
+  renderPosts();
+}
+
+function deletePost(id) {
+  SVBlog.deletePost(id);
+  renderPosts();
+}
+
+function renderPosts() {
+  const posts = SVBlog.getPosts();
+  const list = document.getElementById('post-list');
+  const empty = document.getElementById('no-posts');
+  list.innerHTML = '';
+
+  if (posts.length === 0) {
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+
+  posts.slice().reverse().forEach(function (post) {
+    const row = document.createElement('div');
+    row.className = 'post-row';
+    const thumb = post.image
+      ? '<img class="post-row-thumb" src="' + escapeAttr(post.image) + '" alt="">'
+      : '<div class="post-row-thumb"></div>';
+    row.innerHTML =
+      '<div class="post-row-left">' + thumb +
+      '<div><div class="post-row-title">' + escapeHtml(post.title) + '</div>' +
+      '<div class="post-row-meta">' + escapeHtml(post.category) + ' · ' + escapeHtml(post.date) + '</div></div></div>' +
+      '<button class="btn-danger" onclick="deletePost(\'' + post.id + '\')">Delete</button>';
+    list.appendChild(row);
+  });
+}
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str || '';
+  return div.innerHTML;
+}
+function escapeAttr(str) { return escapeHtml(str); }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TrailNest | Tour & Travel — Curated Trips, Real Support</title>
+<meta name="description" content="Book curated domestic and international tour packages with TrailNest. Transparent pricing, real human support, and flexible cancellation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="styles.css">
+<script src="theme.js"></script>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="wrap nav-row">
+    <a href="index.html" class="logo"><span class="logo-mark"><i class="fa-solid fa-plane"></i></span>TrailNest</a>
+    <nav class="nav-links">
+      <a href="#destinations">Destinations</a>
+      <a href="#packages">Packages</a>
+      <a href="#faqs">FAQs</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme"></button>
+      <a href="#packages" class="btn btn-primary">Plan your trip</a>
+      <button class="nav-burger" onclick="toggleMobileNav()" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="nav-mobile-panel" id="mobile-nav">
+      <a href="#packages" class="btn btn-primary btn-block" style="margin-bottom:10px;" onclick="toggleMobileNav()">Plan your trip</a>
+      <a href="#destinations" onclick="toggleMobileNav()">Destinations</a>
+      <a href="#packages" onclick="toggleMobileNav()">Packages</a>
+      <a href="#faqs" onclick="toggleMobileNav()">FAQs</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="section" style="border-bottom:1px solid var(--line); padding-top:88px; position:relative; overflow:hidden;">
+  <div class="hero-plane-wrap" aria-hidden="true">
+    <i class="fa-solid fa-plane hero-plane"></i>
+    <i class="fa-solid fa-plane hero-plane delay"></i>
+  </div>
+  <div class="hero-grid wrap" style="position:relative; z-index:1;">
+    <div>
+      <span class="eyebrow">Licensed tour operator</span>
+      <h1 style="font-size:clamp(34px,4.6vw,54px); margin-top:18px;">
+        Discover the world, one trip at a time.
+      </h1>
+      <p style="color:var(--fg-dim); font-size:18px; margin-top:20px; max-width:520px;">
+        TrailNest plans curated domestic and international tours — real itineraries, transparent pricing, and a human support team you can actually reach before, during, and after your trip.
+      </p>
+      <div style="display:flex; gap:14px; margin-top:32px; flex-wrap:wrap;">
+        <a href="#packages" class="btn btn-primary">View packages</a>
+        <a href="#destinations" class="btn btn-ghost">Explore destinations</a>
+      </div>
+      <div style="display:flex; gap:22px; margin-top:36px; flex-wrap:wrap;">
+        <span class="pill"><i class="fa-solid fa-check" style="color:var(--cyan);"></i> Free cancellation window</span>
+        <span class="pill"><i class="fa-solid fa-check" style="color:var(--cyan);"></i> Local, licensed guides</span>
+        <span class="pill"><i class="fa-solid fa-check" style="color:var(--cyan);"></i> 24/7 trip support</span>
+      </div>
+    </div>
+    <div style="background:var(--ink-900); border:1px solid var(--line); border-radius:var(--radius-lg); padding:26px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
+        <span class="eyebrow">Featured trip</span>
+        <span style="font-family:var(--font-mono); font-size:12px; color:var(--fg-mute);">7 days / 6 nights</span>
+      </div>
+      <div style="border-radius:var(--radius-md); aspect-ratio:16/9; overflow:hidden; border:1px solid var(--line);">
+        <img src="https://picsum.photos/seed/trailnest-featured/800/450" alt="Featured trip destination" style="width:100%; height:100%; object-fit:cover; display:block;">
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:20px;">
+        <div style="text-align:center;"><div style="font-family:var(--font-display); font-size:22px;">180+</div><div style="color:var(--fg-mute); font-size:12.5px;">Destinations</div></div>
+        <div style="text-align:center;"><div style="font-family:var(--font-display); font-size:22px;">40k+</div><div style="color:var(--fg-mute); font-size:12.5px;">Travelers</div></div>
+        <div style="text-align:center;"><div style="font-family:var(--font-display); font-size:22px;">4.8/5</div><div style="color:var(--fg-mute); font-size:12.5px;">Avg. rating</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STAT BAR -->
+<section class="section" style="padding:56px 0;">
+  <div class="wrap">
+    <div class="stat-bar">
+      <div class="stat-item">
+        <div class="stat-icon"><i class="fa-solid fa-earth-americas"></i></div>
+        <div class="stat-value">180+</div>
+        <div class="stat-label">Destinations</div>
+        <div class="stat-sub">Domestic &amp; international</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon"><i class="fa-solid fa-suitcase-rolling"></i></div>
+        <div class="stat-value">40,000+</div>
+        <div class="stat-label">Trips booked</div>
+        <div class="stat-sub">Since launch</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <div class="stat-value">100%</div>
+        <div class="stat-label">Licensed operator</div>
+        <div class="stat-sub">Fully insured trips</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon"><i class="fa-solid fa-star"></i></div>
+        <div class="stat-value">4.8 / 5</div>
+        <div class="stat-label">Traveler rating</div>
+        <div class="stat-sub">From verified reviews</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE AVAILABILITY -->
+<section class="section" id="destinations">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom:28px;">
+      <span class="eyebrow">Live trip availability</span>
+      <h2 style="font-size:clamp(24px,3vw,32px);">Popular departures this month</h2>
+      <p>Real-time seat availability across our most-booked routes — updated as bookings come in.</p>
+    </div>
+    <div class="infra-summary">
+      <div class="stat-item" style="border:none; padding:0;">
+        <div style="color:var(--fg-mute); font-size:12px; font-family:var(--font-mono); text-transform:uppercase;">Active departures</div>
+        <div class="stat-value" style="color:var(--cyan);">24</div>
+      </div>
+      <div class="stat-item" style="border:none; padding:0;">
+        <div style="color:var(--fg-mute); font-size:12px; font-family:var(--font-mono); text-transform:uppercase;">Avg. group size</div>
+        <div class="stat-value">12 travelers</div>
+      </div>
+      <div class="stat-item" style="border:none; padding:0;">
+        <div style="color:var(--fg-mute); font-size:12px; font-family:var(--font-mono); text-transform:uppercase;">Booking window</div>
+        <div class="stat-value" style="color:#4ADE80;">Open</div>
+      </div>
+    </div>
+    <div class="node-grid">
+      <div class="node-card">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div style="font-size:12.5px; color:var(--fg-mute);">Mountains</div>
+          <span class="node-status">Seats open</span>
+        </div>
+        <h4 style="font-size:15px; margin-top:6px;">Highland Trek</h4>
+        <div class="node-metric"><span>Duration</span><b>6 days</b></div>
+        <div class="node-metric"><span>Seats left</span><b>7</b></div>
+        <div class="node-metric"><span>From</span><b>£649</b></div>
+      </div>
+      <div class="node-card">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div style="font-size:12.5px; color:var(--fg-mute);">Coastal</div>
+          <span class="node-status">Seats open</span>
+        </div>
+        <h4 style="font-size:15px; margin-top:6px;">Coastal Escape</h4>
+        <div class="node-metric"><span>Duration</span><b>4 days</b></div>
+        <div class="node-metric"><span>Seats left</span><b>11</b></div>
+        <div class="node-metric"><span>From</span><b>£389</b></div>
+      </div>
+      <div class="node-card">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div style="font-size:12.5px; color:var(--fg-mute);">City</div>
+          <span class="node-status">Seats open</span>
+        </div>
+        <h4 style="font-size:15px; margin-top:6px;">City Explorer</h4>
+        <div class="node-metric"><span>Duration</span><b>3 days</b></div>
+        <div class="node-metric"><span>Seats left</span><b>15</b></div>
+        <div class="node-metric"><span>From</span><b>£249</b></div>
+      </div>
+      <div class="node-card">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div style="font-size:12.5px; color:var(--fg-mute);">International</div>
+          <span class="node-status">Seats open</span>
+        </div>
+        <h4 style="font-size:15px; margin-top:6px;">Alpine Adventure</h4>
+        <div class="node-metric"><span>Duration</span><b>8 days</b></div>
+        <div class="node-metric"><span>Seats left</span><b>5</b></div>
+        <div class="node-metric"><span>From</span><b>£1,149</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section" id="why-us">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Why TrailNest</span>
+      <h2>Planned properly, not just booked.</h2>
+      <p>Every trip is built by people who've actually been there — not an algorithm bundling random hotel deals.</p>
+    </div>
+    <div class="grid-3">
+      <div style="background:var(--ink-900); border:1px solid var(--line); border-radius:var(--radius-md); padding:26px;">
+        <h3 style="font-size:18px; margin-bottom:10px;">Licensed &amp; insured</h3>
+        <p style="color:var(--fg-dim); font-size:14.5px;">Every trip runs under our full tour operator licence, with travel insurance included as standard.</p>
+      </div>
+      <div style="background:var(--ink-900); border:1px solid var(--line); border-radius:var(--radius-md); padding:26px;">
+        <h3 style="font-size:18px; margin-bottom:10px;">Local, vetted guides</h3>
+        <p style="color:var(--fg-dim); font-size:14.5px;">Every itinerary is led by guides who live where they guide — not a rotating contractor pool.</p>
+      </div>
+      <div style="background:var(--ink-900); border:1px solid var(--line); border-radius:var(--radius-md); padding:26px;">
+        <h3 style="font-size:18px; margin-bottom:10px;">Flexible cancellation</h3>
+        <p style="color:var(--fg-dim); font-size:14.5px;">Plans change — cancel within the window shown at booking and get a full refund, no arguments.</p>
+      </div>
+      <div style="background:var(--ink-900); border:1px solid var(--line); border-radius:var(--radius-md); padding:26px;">
+        <h3 style="font-size:18px; margin-bottom:10px;">Real customer support</h3>
+        <p style="color:var(--fg-dim); font-size:14.5px;">A support team you can reach before you book, mid-trip, and after — not a bot loop.</p>
+      </div>
+      <div style="background:var(--ink-900); border:1px solid var(--line); border-radius:var(--radius-md); padding:26px;">
+        <h3 style="font-size:18px; margin-bottom:10px;">Transparent pricing</h3>
+        <p style="color:var(--fg-dim); font-size:14.5px;">The price you see includes what it says it includes — no surprise "resort fee" at check-in.</p>
+      </div>
+      <div style="background:var(--ink-900); border:1px solid var(--line); border-radius:var(--radius-md); padding:26px;">
+        <h3 style="font-size:18px; margin-bottom:10px;">Small group sizes</h3>
+        <p style="color:var(--fg-dim); font-size:14.5px;">Most tours cap around 12–16 travelers, so it never feels like a herded coach trip.</p>
+      </div>
+    </div>
+
+    <!-- extra feature strip -->
+    <div class="grid-3" style="margin-top:24px;">
+      <div style="background:var(--ink-900); border:1px solid var(--line); border-radius:var(--radius-md); padding:26px;">
+        <div style="width:40px; height:40px; border-radius:10px; background:var(--ink-800); display:flex; align-items:center; justify-content:center; margin-bottom:14px;"><i class="fa-solid fa-plane-departure"></i></div>
+        <h3 style="font-size:17px; margin-bottom:8px;">Airport transfers included</h3>
+        <p style="color:var(--fg-dim); font-size:14.5px;">Most packages include return airport transfers, so the trip starts the moment you land.</p>
+      </div>
+      <div style="background:var(--ink-900); border:1px solid var(--line); border-radius:var(--radius-md); padding:26px;">
+        <div style="width:40px; height:40px; border-radius:10px; background:var(--ink-800); display:flex; align-items:center; justify-content:center; margin-bottom:14px;"><i class="fa-solid fa-headset"></i></div>
+        <h3 style="font-size:17px; margin-bottom:8px;">24/7 trip support</h3>
+        <p style="color:var(--fg-dim); font-size:14.5px;">A real number to call if a flight changes or plans shift, any time of day, wherever you are.</p>
+      </div>
+      <div style="background:var(--ink-900); border:1px solid var(--line); border-radius:var(--radius-md); padding:26px;">
+        <div style="width:40px; height:40px; border-radius:10px; background:var(--ink-800); display:flex; align-items:center; justify-content:center; margin-bottom:14px;"><i class="fa-solid fa-bolt"></i></div>
+        <h3 style="font-size:17px; margin-bottom:8px;">Instant confirmation</h3>
+        <p style="color:var(--fg-dim); font-size:14.5px;">Booking requests are confirmed by our team quickly, with your itinerary emailed straight over.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head" style="margin: 0 auto 40px; text-align:center;">
+      <span class="eyebrow">Why book a package</span>
+      <h2>Booking separately vs. booking with us</h2>
+      <p style="margin:14px auto 0;">See what a curated TrailNest package saves you over piecing a trip together yourself.</p>
+    </div>
+    <div class="compare-table-wrap">
+    <table class="compare-table">
+      <thead>
+        <tr><th>Feature</th><th>TrailNest package</th><th>Booking it yourself</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Planning time</td><td class="good">Itinerary ready in minutes</td><td class="bad">Hours across multiple sites</td></tr>
+        <tr><td>Cancellation</td><td class="good">Clear refund window</td><td class="bad">Varies per booking, often non-refundable</td></tr>
+        <tr><td>Local guide</td><td class="good">Included on every trip</td><td class="bad">Booked separately, if at all</td></tr>
+        <tr><td>Travel insurance</td><td class="good">Included as standard</td><td class="bad">Extra cost, easy to forget</td></tr>
+        <tr><td>Support if something goes wrong</td><td class="good">24/7 human support line</td><td class="bad">Chase each provider separately</td></tr>
+        <tr><td>Airport transfers</td><td class="good">Included on most packages</td><td class="bad">Booked and paid separately</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<!-- TRAVEL PERKS MARQUEE -->
+<section class="section" style="padding:56px 0;">
+  <div class="wrap">
+    <p style="text-align:center; font-family:var(--font-mono); font-size:12.5px; letter-spacing:0.08em; color:var(--fg-mute); text-transform:uppercase; margin-bottom:22px;">What's included on every trip</p>
+  </div>
+  <div class="marquee-wrap">
+    <div class="marquee-track" id="marquee-track"></div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section class="section" id="packages">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Packages</span>
+      <h2>Pick your kind of trip.</h2>
+      <p>Every package includes a licensed local guide, travel insurance, and 24/7 support. Cancel within the refund window at no cost.</p>
+    </div>
+    <div class="grid-3">
+      <div style="background:var(--ink-900); border:1px solid var(--line); border-radius:var(--radius-lg); padding:30px;">
+        <div class="eyebrow" style="color:var(--fg-mute);">Domestic Explorer</div>
+        <div style="font-family:var(--font-display); font-size:34px; margin-top:12px;">£249<span style="font-size:14px; color:var(--fg-mute); font-weight:400;"> /person</span></div>
+        <ul style="margin-top:20px; display:flex; flex-direction:column; gap:10px; color:var(--fg-dim); font-size:14.5px;">
+          <li><i class="fa-solid fa-check" style="color:var(--cyan);"></i> 3-day city trip</li>
+          <li><i class="fa-solid fa-check" style="color:var(--cyan);"></i> Local guide included</li>
+          <li><i class="fa-solid fa-check" style="color:var(--cyan);"></i> Free cancellation, 7 days out</li>
+        </ul>
+        <button class="btn btn-ghost btn-block" style="margin-top:26px;" onclick="openPlanModal('Domestic Explorer', '£249/person')">Choose this package</button>
+      </div>
+      <div style="background:var(--ink-900); border:1px solid var(--cyan); border-radius:var(--radius-lg); padding:30px; position:relative;">
+        <span style="position:absolute; top:-12px; right:24px; background:var(--cyan); color:var(--ink-950); font-size:12px; font-weight:700; padding:4px 12px; border-radius:100px;">Most booked</span>
+        <div class="eyebrow">International Adventure</div>
+        <div style="font-family:var(--font-display); font-size:34px; margin-top:12px;">£1,149<span style="font-size:14px; color:var(--fg-mute); font-weight:400;"> /person</span></div>
+        <ul style="margin-top:20px; display:flex; flex-direction:column; gap:10px; color:var(--fg-dim); font-size:14.5px;">
+          <li><i class="fa-solid fa-check" style="color:var(--cyan);"></i> 8-day guided trip</li>
+          <li><i class="fa-solid fa-check" style="color:var(--cyan);"></i> Flights &amp; transfers included</li>
+          <li><i class="fa-solid fa-check" style="color:var(--cyan);"></i> Free cancellation, 14 days out</li>
+        </ul>
+        <button class="btn btn-primary btn-block" style="margin-top:26px;" onclick="openPlanModal('International Adventure', '£1,149/person')">Choose this package</button>
+      </div>
+      <div style="background:var(--ink-900); border:1px solid var(--line); border-radius:var(--radius-lg); padding:30px;">
+        <div class="eyebrow" style="color:var(--fg-mute);">Luxury Escape</div>
+        <div style="font-family:var(--font-display); font-size:34px; margin-top:12px;">£2,399<span style="font-size:14px; color:var(--fg-mute); font-weight:400;"> /person</span></div>
+        <ul style="margin-top:20px; display:flex; flex-direction:column; gap:10px; color:var(--fg-dim); font-size:14.5px;">
+          <li><i class="fa-solid fa-check" style="color:var(--cyan);"></i> 10-day premium trip</li>
+          <li><i class="fa-solid fa-check" style="color:var(--cyan);"></i> 5-star stays &amp; private guide</li>
+          <li><i class="fa-solid fa-check" style="color:var(--cyan);"></i> Free cancellation, 21 days out</li>
+        </ul>
+        <button class="btn btn-ghost btn-block" style="margin-top:26px;" onclick="openPlanModal('Luxury Escape', '£2,399/person')">Choose this package</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Plan/booking request modal -->
+<div class="modal-backdrop" id="plan-modal" onclick="if(event.target===this) closePlanModal()">
+  <div class="modal-box" style="max-width:460px;">
+    <button class="modal-close" onclick="closePlanModal()"><i class="fa-solid fa-xmark"></i></button>
+
+    <!-- STEP 1: contact info -->
+    <div id="plan-step-1">
+      <span class="eyebrow">Book a trip</span>
+      <h2 style="font-size:22px; margin-top:10px;">Request a package</h2>
+      <p style="color:var(--fg-dim); font-size:14px; margin-top:8px;">Step 1 of 3 — pick your tour and add your contact details.</p>
+      <form id="plan-form" style="margin-top:20px;" onsubmit="return goToStep2(event)">
+        <label style="display:block; font-size:13px; color:var(--fg-mute); margin-bottom:6px; font-family:var(--font-mono);" for="p-package">Which tour?</label>
+        <select id="p-package" required onchange="onPackageChange()" style="width:100%; background:var(--ink-800); border:1px solid var(--line-strong); color:var(--fg); padding:11px 13px; border-radius:8px; font-size:14.5px; margin-bottom:16px;">
+          <option value="Domestic Explorer|£249/person">Domestic Explorer — £249/person</option>
+          <option value="International Adventure|£1,149/person">International Adventure — £1,149/person</option>
+          <option value="Luxury Escape|£2,399/person">Luxury Escape — £2,399/person</option>
+        </select>
+        <label style="display:block; font-size:13px; color:var(--fg-mute); margin-bottom:6px; font-family:var(--font-mono);" for="p-name">Full name</label>
+        <input id="p-name" type="text" required style="width:100%; background:var(--ink-800); border:1px solid var(--line-strong); color:var(--fg); padding:11px 13px; border-radius:8px; font-size:14.5px; margin-bottom:16px;" placeholder="Jane Smith">
+        <label style="display:block; font-size:13px; color:var(--fg-mute); margin-bottom:6px; font-family:var(--font-mono);" for="p-email">Email</label>
+        <input id="p-email" type="email" required style="width:100%; background:var(--ink-800); border:1px solid var(--line-strong); color:var(--fg); padding:11px 13px; border-radius:8px; font-size:14.5px; margin-bottom:8px;" placeholder="jane@email.com" onblur="checkPlanEmailLive()">
+        <p id="p-email-error" style="display:none; color:var(--coral); font-size:12.5px; margin-bottom:12px;"></p>
+        <button type="submit" id="plan-submit-btn" class="btn btn-primary btn-block">Continue</button>
+      </form>
+    </div>
+
+    <!-- STEP 2: request sent confirmation -->
+    <div id="plan-step-2" style="display:none; text-align:center;">
+      <div style="width:52px; height:52px; border-radius:50%; background:var(--cyan-dim); display:flex; align-items:center; justify-content:center; margin:0 auto 16px; font-size:22px; color:var(--cyan);">
+        <i class="fa-solid fa-paper-plane"></i>
+      </div>
+      <h3 style="font-size:19px;">Request sent!</h3>
+      <p style="color:var(--fg-dim); font-size:14px; margin-top:10px;">Your email is confirmed and your request for the <strong id="step2-plan-name" style="color:var(--fg);">package</strong> is in. One more step — add your trip details and pick how you'd like to pay.</p>
+      <button class="btn btn-primary btn-block" style="margin-top:22px;" onclick="continueToPayment()">Continue to payment options</button>
+    </div>
+
+    <!-- STEP 3: trip details + payment method -->
+    <div id="plan-step-3" style="display:none;">
+      <span class="eyebrow">Step 3 of 3</span>
+      <h2 style="font-size:22px; margin-top:10px;">Trip details &amp; payment</h2>
+      <p style="color:var(--fg-dim); font-size:14px; margin-top:8px;">No card details are collected on this site — here's exactly how payment works.</p>
+      <form id="details-form" style="margin-top:20px;" onsubmit="return submitPlanOrder(event)">
+
+        <label style="display:block; font-size:13px; color:var(--fg-mute); margin-bottom:6px; font-family:var(--font-mono);" for="p-travelers">Number of travelers</label>
+        <input id="p-travelers" type="number" min="1" max="20" value="1" required style="width:100%; background:var(--ink-800); border:1px solid var(--line-strong); color:var(--fg); padding:11px 13px; border-radius:8px; font-size:14.5px; margin-bottom:16px;">
+
+        <label style="display:block; font-size:13px; color:var(--fg-mute); margin-bottom:6px; font-family:var(--font-mono);" for="p-date">Preferred travel date</label>
+        <input id="p-date" type="date" required style="width:100%; background:var(--ink-800); border:1px solid var(--line-strong); color:var(--fg); padding:11px 13px; border-radius:8px; font-size:14.5px; margin-bottom:20px;">
+
+        <label style="display:block; font-size:13px; color:var(--fg-mute); margin-bottom:10px; font-family:var(--font-mono);">Payment</label>
+
+        <!-- Option A: pay by card via a secure link (no card fields collected here) -->
+        <div style="background:var(--ink-800); border:1px solid var(--line-strong); border-radius:var(--radius-sm); padding:16px; margin-bottom:12px;">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+            <div style="width:34px; height:34px; border-radius:8px; background:var(--cyan-dim); display:flex; align-items:center; justify-content:center; color:var(--cyan); font-size:15px;"><i class="fa-solid fa-credit-card"></i></div>
+            <div style="font-weight:600; font-size:14.5px;">Pay by card</div>
+          </div>
+          <p style="color:var(--fg-mute); font-size:12.5px; line-height:1.6;">Once your dates are confirmed, we'll email a secure checkout link (Stripe/PayPal) to enter your card details there — never on this page.</p>
+        </div>
+
+        <!-- Option B: bank transfer, with real account details -->
+        <div style="background:var(--ink-800); border:1px solid var(--line-strong); border-radius:var(--radius-sm); padding:16px; margin-bottom:20px;">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+            <div style="width:34px; height:34px; border-radius:8px; background:var(--cyan-dim); display:flex; align-items:center; justify-content:center; color:var(--cyan); font-size:15px;"><i class="fa-solid fa-building-columns"></i></div>
+            <div style="font-weight:600; font-size:14.5px;">Or pay by bank transfer</div>
+          </div>
+          <div style="display:grid; grid-template-columns:auto 1fr; gap:6px 14px; font-size:13.5px;">
+            <span style="color:var(--fg-mute);">Account name</span><span id="bd-name">TrailNest Travel Ltd</span>
+            <span style="color:var(--fg-mute);">Bank</span><span id="bd-bank">Northbridge Bank UK</span>
+            <span style="color:var(--fg-mute);">Sort code</span><span id="bd-sort">12-34-56</span>
+            <span style="color:var(--fg-mute);">Account number</span><span id="bd-acct">12345678</span>
+            <span style="color:var(--fg-mute);">IBAN</span><span id="bd-iban">GB29 NBUK 1234 5612 3456 78</span>
+            <span style="color:var(--fg-mute);">Reference</span><span id="bd-ref">Add at next step</span>
+          </div>
+          <p style="color:var(--amber); font-size:12px; margin-top:10px;"><i class="fa-solid fa-triangle-exclamation"></i> Placeholder demo account — replace with your real business bank details before going live.</p>
+        </div>
+
+        <label style="display:block; font-size:13px; color:var(--fg-mute); margin-bottom:6px; font-family:var(--font-mono);" for="p-notes">Special requests (optional)</label>
+        <textarea id="p-notes" rows="2" style="width:100%; background:var(--ink-800); border:1px solid var(--line-strong); color:var(--fg); padding:11px 13px; border-radius:8px; font-size:14.5px; margin-bottom:18px; resize:vertical;" placeholder="Dietary needs, room preferences, anything else we should know"></textarea>
+
+        <div style="display:flex; gap:10px;">
+          <button type="button" class="btn btn-ghost" style="flex:1;" onclick="backToStep2()">Back</button>
+          <button type="submit" id="details-submit-btn" class="btn btn-primary" style="flex:2;">Send booking request</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- STEP 4: final confirmation -->
+    <div id="plan-step-4" style="display:none; text-align:center;">
+      <div style="width:52px; height:52px; border-radius:50%; background:var(--cyan-dim); display:flex; align-items:center; justify-content:center; margin:0 auto 16px; font-size:22px; color:var(--cyan);">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <h3 style="font-size:19px;">Booking request received</h3>
+      <p style="color:var(--fg-dim); font-size:14px; margin-top:10px;">Our team will confirm availability and follow up by email with next steps for payment. Nothing has been charged yet.</p>
+      <button class="btn btn-ghost btn-block" style="margin-top:20px;" onclick="closePlanModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section class="section" id="faqs">
+  <div class="wrap container-narrow">
+    <div class="section-head" style="max-width:100%;">
+      <span class="eyebrow">Common questions</span>
+      <h2>FAQs</h2>
+    </div>
+    <div id="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Is TrailNest a licensed tour operator?<span class="chev">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes — every trip runs under our full tour operator licence, with travel insurance included as standard on every package.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">What's included in the price shown?<span class="chev">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Accommodation, a local guide, and listed transfers are always included. Flights are included only where stated on the package.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Can I cancel if my plans change?<span class="chev">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes — cancel within the refund window shown at booking (varies by package) for a full refund.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">How do I confirm and pay for a trip?<span class="chev">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Submit a request on any package, and our team follows up by email to confirm dates and take payment securely.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Do you offer solo traveler spots?<span class="chev">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes — most departures welcome solo travelers into a small group, so you're never the only one on the trip.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">What if my flight gets delayed mid-trip?<span class="chev">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Call our 24/7 support line — we'll help adjust your itinerary and connect you with your guide on the ground.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a href="index.html" class="logo"><span class="logo-mark"><i class="fa-solid fa-plane"></i></span>TrailNest</a>
+        <p style="margin-top:14px;">Curated tour packages — real itineraries, transparent pricing, and support you can reach.</p>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <ul>
+          <li><a href="#destinations">Destinations</a></li>
+          <li><a href="#packages">Packages</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Admin</h4>
+        <ul>
+          <li><a href="admin.html">Blog admin</a></li>
+          <li><a href="admin-contact.html">Contact messages</a></li>
+          <li><a href="admin-bookings.html">Booking requests</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 TrailNest. All rights reserved.</span>
+      <span>Placeholder brand — swap in your client's real name &amp; licensing details.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="site-data.js"></script>
+<script>
+function toggleMobileNav() {
+  document.getElementById('mobile-nav').classList.toggle('open');
+}
+
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const answer = item.querySelector('.faq-a');
+  const isOpen = item.classList.contains('open');
+
+  document.querySelectorAll('.faq-item.open').forEach(function (el) {
+    if (el !== item) {
+      el.classList.remove('open');
+      el.querySelector('.faq-a').style.maxHeight = null;
+    }
+  });
+
+  if (isOpen) {
+    item.classList.remove('open');
+    answer.style.maxHeight = null;
+  } else {
+    item.classList.add('open');
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+  }
+}
+
+(function () {
+  const perks = [
+    ['fa-solid fa-plane', 'Flights & transfers', 'On select packages'],
+    ['fa-solid fa-hotel', 'Handpicked stays', 'Vetted accommodation'],
+    ['fa-solid fa-person-hiking', 'Local guides', 'Licensed & insured'],
+    ['fa-solid fa-shield-heart', 'Travel insurance', 'Included as standard'],
+    ['fa-solid fa-headset', '24/7 support', 'Real people, not bots'],
+    ['fa-solid fa-rotate-left', 'Free cancellation', 'Within the refund window'],
+    ['fa-solid fa-utensils', 'Selected meals', 'Local cuisine included'],
+    ['fa-solid fa-car', 'Airport pickup', 'On most packages']
+  ];
+  const track = document.getElementById('marquee-track');
+  function renderSet() {
+    return perks.map(function (d) {
+      return '<div class="device-chip"><i class="' + d[0] + '"></i><div><div class="device-name">' + d[1] + '</div><div class="device-sub">' + d[2] + '</div></div></div>';
+    }).join('');
+  }
+  track.innerHTML = renderSet() + renderSet();
+})();
+
+let selectedPlan = null;
+
+function onPackageChange() {
+  const select = document.getElementById('p-package');
+  const [plan, price] = select.value.split('|');
+  selectedPlan = { plan: plan, price: price };
+}
+
+function openPlanModal(planName, planPrice) {
+  selectedPlan = { plan: planName, price: planPrice };
+  document.getElementById('p-package').value = planName + '|' + planPrice;
+  document.getElementById('p-email-error').style.display = 'none';
+  document.getElementById('plan-form').reset();
+  document.getElementById('p-package').value = planName + '|' + planPrice; // reset() above clears this back to default, so set it again
+  document.getElementById('details-form').reset();
+
+  document.getElementById('plan-step-1').style.display = 'block';
+  document.getElementById('plan-step-2').style.display = 'none';
+  document.getElementById('plan-step-3').style.display = 'none';
+  document.getElementById('plan-step-4').style.display = 'none';
+
+  // Default the date picker to two weeks out so it's not empty/in the past
+  const d = new Date();
+  d.setDate(d.getDate() + 14);
+  document.getElementById('p-date').value = d.toISOString().slice(0, 10);
+  document.getElementById('p-date').min = new Date().toISOString().slice(0, 10);
+
+  document.getElementById('plan-modal').classList.add('open');
+}
+
+function closePlanModal() {
+  document.getElementById('plan-modal').classList.remove('open');
+}
+
+function backToStep2() {
+  document.getElementById('plan-step-3').style.display = 'none';
+  document.getElementById('plan-step-2').style.display = 'block';
+}
+
+function continueToPayment() {
+  // Lock in whatever tour is currently selected in the dropdown
+  onPackageChange();
+  document.getElementById('plan-step-2').style.display = 'none';
+  document.getElementById('plan-step-3').style.display = 'block';
+  // Reference gets the traveler's name once they've entered it
+  const name = document.getElementById('p-name').value.trim();
+  document.getElementById('bd-ref').textContent = (name || 'Your name') + ' — ' + selectedPlan.plan;
+}
+
+// Runs on blur (leaving the email field) so the person sees an error
+// right away, before they even try to submit.
+function checkPlanEmailLive() {
+  const email = document.getElementById('p-email').value.trim();
+  const errorEl = document.getElementById('p-email-error');
+  if (!email) { errorEl.style.display = 'none'; return; }
+
+  if (!SVValidate.emailFormatValid(email)) {
+    errorEl.textContent = 'Enter a valid email address.';
+    errorEl.style.display = 'block';
+    return;
+  }
+  errorEl.style.display = 'none';
+
+  SVValidate.checkEmailDomain(email).then(function (result) {
+    if (result === 'invalid') {
+      errorEl.textContent = 'Enter a valid email address — this domain doesn\'t accept email.';
+      errorEl.style.display = 'block';
+    } else {
+      errorEl.style.display = 'none';
+    }
+  });
+}
+
+// Step 1 → Step 2: validate name + email (format, then real domain check),
+// then show the "Request sent" confirmation before moving on to payment.
+function goToStep2(e) {
+  e.preventDefault();
+  onPackageChange();
+  const email = document.getElementById('p-email').value.trim();
+  const errorEl = document.getElementById('p-email-error');
+  const btn = document.getElementById('plan-submit-btn');
+  errorEl.style.display = 'none';
+
+  if (!SVValidate.emailFormatValid(email)) {
+    errorEl.textContent = 'Enter a valid email address.';
+    errorEl.style.display = 'block';
+    document.getElementById('p-email').focus();
+    return false;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Checking email...';
+
+  SVValidate.checkEmailDomain(email).then(function (result) {
+    btn.disabled = false;
+    btn.textContent = 'Continue';
+
+    if (result === 'invalid') {
+      errorEl.textContent = 'Enter a valid email address — this domain doesn\'t accept email.';
+      errorEl.style.display = 'block';
+      document.getElementById('p-email').focus();
+      return;
+    }
+
+    document.getElementById('step2-plan-name').textContent = selectedPlan.plan + ' (' + selectedPlan.price + ')';
+    document.getElementById('plan-step-1').style.display = 'none';
+    document.getElementById('plan-step-2').style.display = 'block';
+  });
+
+  return false;
+}
+
+// Step 3 → Step 4: save the full booking request (contact info, trip
+// details, and chosen payment method) so it shows up in admin-bookings.html.
+function submitPlanOrder(e) {
+  e.preventDefault();
+  const btn = document.getElementById('details-submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+
+  SVData.addOrder({
+    name: document.getElementById('p-name').value.trim(),
+    email: document.getElementById('p-email').value.trim(),
+    plan: selectedPlan.plan,
+    price: selectedPlan.price,
+    travelers: document.getElementById('p-travelers').value,
+    travelDate: document.getElementById('p-date').value,
+    paymentMethod: 'Card (secure link) or bank transfer — customer\'s choice',
+    notes: document.getElementById('p-notes').value.trim()
+  });
+
+  btn.disabled = false;
+  btn.textContent = 'Send booking request';
+
+  document.getElementById('plan-step-3').style.display = 'none';
+  document.getElementById('plan-step-4').style.display = 'block';
+
+  return false;
+}
+</script>
+
+</body>
+</html>
